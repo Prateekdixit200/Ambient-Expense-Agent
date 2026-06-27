@@ -1,89 +1,243 @@
-# ambient-expense-agent
+# 💳 Ambient Expense Agent
 
-Simple ReAct agent
-Agent generated with `agents-cli` version `0.5.0`
+> An AI-powered corporate expense approval agent built with **Google Agent Development Kit (ADK) 2.0** that automatically validates, categorizes, and approves expense reports using Graph Workflows and human-in-the-loop review.
 
-## Project Structure
+![Python](https://img.shields.io/badge/Python-3.11+-blue)
+![ADK](https://img.shields.io/badge/Google-ADK%202.0-green)
+![License](https://img.shields.io/badge/License-Apache%202.0-orange)
+
+---
+
+## 📌 Overview
+
+Ambient Expense Agent streamlines corporate expense approvals by combining AI reasoning with deterministic workflow execution.
+
+Instead of relying on fixed approval rules, the agent:
+
+- Validates submitted expenses
+- Detects policy violations
+- Performs receipt verification
+- Categorizes expenses
+- Routes high-risk claims for manual approval
+- Automatically approves compliant reports
+
+Built using **Google ADK 2.0 Graph Workflow API**, the project demonstrates production-ready agent development with human-in-the-loop interactions.
+
+---
+
+# ✨ Features
+
+- 🤖 AI-powered expense validation
+- 📄 Receipt verification
+- 💰 Budget policy checks
+- 🛡 Fraud detection hooks
+- 👤 Human approval workflow
+- ⚡ Google ADK 2.0 Graph Workflows
+- 📊 Evaluation pipeline
+- ☁ Deployable to Google Agent Runtime
+- 🔍 Built-in tracing and observability
+
+---
+
+# 🏗 Architecture
+
+```
+                Employee
+
+                    │
+
+          Submit Expense Report
+
+                    │
+
+                    ▼
+
+         Expense Validation Node
+
+                    │
+
+        ┌───────────┴───────────┐
+
+        │                       │
+
+        ▼                       ▼
+
+  Auto Approve           Human Review
+
+        │                       │
+
+        └───────────┬───────────┘
+
+                    ▼
+
+             Final Decision
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technology |
+|-----------|------------|
+| Language | Python |
+| Framework | Google ADK 2.0 |
+| Workflow | Graph Workflow API |
+| Runtime | Agents CLI |
+| Deployment | Google Agent Runtime |
+| Package Manager | uv |
+| Infrastructure | Terraform |
+| Observability | Cloud Trace |
+
+---
+
+# 📂 Project Structure
 
 ```
 ambient-expense-agent/
-├── app/         # Core agent code
-│   ├── agent.py               # Main agent logic
-│   ├── agent_runtime_app.py    # Agent Runtime application logic
-│   └── app_utils/             # App utilities and helpers
-├── tests/                     # Unit, integration, and load tests
-├── GEMINI.md                  # AI-assisted development guide
-└── pyproject.toml             # Project dependencies
+
+├── expense_agent/
+│   ├── app/
+│   ├── workflows/
+│   ├── tools/
+│   └── prompts/
+│
+├── tests/
+├── deployment/
+├── artifacts/
+├── README.md
+├── pyproject.toml
+└── uv.lock
 ```
 
-> 💡 **Tip:** Use [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI-assisted development - project context is pre-configured in `GEMINI.md`.
+---
 
-## Requirements
+# 🚀 Getting Started
 
-Before you begin, ensure you have:
-- **uv**: Python package manager (used for all dependency management in this project) - [Install](https://docs.astral.sh/uv/getting-started/installation/) ([add packages](https://docs.astral.sh/uv/concepts/dependencies/) with `uv add <package>`)
-- **agents-cli**: Agents CLI - Install with `uv tool install google-agents-cli`
-- **Google Cloud SDK**: For GCP services - [Install](https://cloud.google.com/sdk/docs/install)
+## Prerequisites
 
+- Python 3.11+
+- uv
+- Google Agents CLI
+- Google ADK 2.0
+- Google AI Studio API Key
 
-## Quick Start
+---
 
-Install `agents-cli` and its skills if not already installed:
-
-```bash
-uvx google-agents-cli setup
-```
-
-Install required packages:
+## Installation
 
 ```bash
+git clone https://github.com/<username>/ambient-expense-agent.git
+
+cd ambient-expense-agent
+
+uv sync
+
 agents-cli install
 ```
 
-Test the agent with a local web server:
+---
+
+# 🔑 Configure Environment
+
+Create a `.env`
+
+```env
+GEMINI_API_KEY=YOUR_API_KEY
+```
+
+---
+
+# ▶ Run Locally
 
 ```bash
 agents-cli playground
 ```
 
-You can also use features from the [ADK](https://adk.dev/) CLI with `uv run adk`.
+---
 
-## Commands
+# 🧪 Run Tests
 
-| Command              | Description                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------- |
-| `agents-cli install` | Install dependencies using uv                                                         |
-| `agents-cli playground` | Launch local development environment                                                  |
-| `agents-cli lint`    | Run code quality checks                                                               |
-| `agents-cli eval`    | Evaluate agent behavior (generate, grade, analyze, and more — see `agents-cli eval --help`) |
-| `uv run pytest tests/unit tests/integration` | Run unit and integration tests                                                        |
-| `agents-cli deploy`  | Deploy agent to Agent Runtime                                                                |
-| `agents-cli publish gemini-enterprise` | Register deployed agent to Gemini Enterprise                    |
-
-## 🛠️ Project Management
-
-| Command | What It Does |
-|---------|--------------|
-| `agents-cli scaffold enhance` | Add CI/CD pipelines and Terraform infrastructure |
-| `agents-cli infra cicd` | One-command setup of entire CI/CD pipeline + infrastructure |
-| `agents-cli scaffold upgrade` | Auto-upgrade to latest version while preserving customizations |
+```bash
+uv run pytest
+```
 
 ---
 
-## Development
-
-Edit your agent logic in `app/agent.py` and test with `agents-cli playground` - it auto-reloads on save.
-
-## Deployment
+# 🚀 Deployment
 
 ```bash
-gcloud config set project <your-project-id>
+gcloud config set project PROJECT_ID
+
 agents-cli deploy
 ```
 
-To add CI/CD and Terraform, run `agents-cli scaffold enhance`.
-To set up your production infrastructure, run `agents-cli infra cicd`.
+---
 
-## Observability
+# 📊 Evaluation
 
-Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
+Run automated evaluations:
+
+```bash
+agents-cli eval
+```
+
+---
+
+# 📈 Observability
+
+The project exports telemetry to:
+
+- Cloud Trace
+- Cloud Logging
+- BigQuery
+
+---
+
+# 🔒 Security
+
+- Prompt injection protection
+- Human approval for high-risk actions
+- Policy validation
+- Input sanitization
+
+---
+
+# 📖 Learning Objectives
+
+This project demonstrates:
+
+- Google ADK 2.0
+- Graph Workflows
+- Function Nodes
+- Human-in-the-loop Agents
+- Agent Deployment
+- Production Evaluation
+- Enterprise AI Agent Design
+
+---
+
+# 🗺 Roadmap
+
+- [ ] OCR Receipt Parsing
+- [ ] Fraud Detection Model
+- [ ] Slack Integration
+- [ ] Email Notifications
+- [ ] Multi-currency Support
+- [ ] Dashboard
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Open a Pull Request.
+
+---
+
+# 📄 License
+
+Licensed under the Apache 2.0 License.
